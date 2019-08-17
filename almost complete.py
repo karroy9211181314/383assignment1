@@ -6,6 +6,7 @@ sender_email = "158120.Moodle@gmail.com"
 password = "moodle123"
 
 import os
+os.system("sudo apt update")
 os.system("sudo apt-get install vim")
 
 os.system("sudo apt install apache2 mysql-client mysql-server php libapache2-mod-php")
@@ -110,10 +111,10 @@ adr=[]
 for i in random.sample(range(1,n),9999):
     if len(str(i))>=4 and len(adr)<num:
         adr.append(str(i)+random.choice(s))
-data = pd.read_csv(r'csv_example.csv')
+data = pd.read_csv(r'StudentData.csv')
 data1  = adr
 data['moodle_name'] = data1
-data.to_csv(r"csv_examples.csv",mode = 'a',index =False)
+data.to_csv(r"StudentDatas.csv",mode = 'a',index =False)
 
 
 
@@ -121,7 +122,7 @@ conn = pymysql.connect(host='127.0.0.1',port=3306, user='debian-sys-maint',passw
 cursor=conn.cursor()
 
 
-with open('test_examples.csv', 'r') as csvFile:
+with open('StudentDatas.csv', 'r') as csvFile:
         reader = csv.reader(csvFile)
         # create empty list
         list_of_students = []
