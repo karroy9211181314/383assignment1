@@ -167,7 +167,7 @@ for i in list_of_students:
                 "$CFG->dbhost    = 'localhost';\n" \
                 "$CFG->dbname    = 'student"+str(i[0])+"';\n" \
                 "$CFG->dbuser    = 'student"+str(i[0])+"';\n" \
-                "$CFG->dbpass    = '"+str(i[3])+"';\n" \
+                "$CFG->dbpass    = '"+str(i[5])+"';\n" \
                 "$CFG->prefix    = 'mdl_';\n" \
                 "$CFG->dboptions = array (\n" \
                 "  'dbpersist' => 0,\n" \
@@ -196,7 +196,7 @@ for i in list_of_students:
                 Subject: Your Login info
         
                 Username: """ + 'student'+str(i[0]) + """
-                Password: """ + str(i[3]) + """
+                Password: """ + str(i[5]) + """
                 Access your Moodle site through this URL: """+'http://'+str(ip)+'/'+str(i[4])
 
         part1 = MIMEText(text, "plain")
