@@ -1,0 +1,77 @@
+准备工作：
+	1选择或创建 Google Cloud Platform 项目。
+	2确保您的 Google Cloud Platform 项目已启用结算功能。
+	3启用Deployment Manager 和 Compute Engine API。
+	4在您的工作站上安装 gcloud 命令行工具。
+	          安装Cloud SDK
+	5配置 gcloud 命令行工具以使用您的项目。在以下命令中，将 [MY_PROJECT] 替换为您的项目 ID：
+			  设置项目ID。：gcloud config set project myproject
+			  设置区域：
+			  gcloud config set compute/region us-central1
+			  gcloud config set compute/zone us-central1-f
+定义资源：
+	6在配置文件中描述您的资源，该文件使用 YAML 语法编写
+	    创建本地文件夹：mkdir deploymentfiles
+		切换到文件夹：cd  deploymentfiles
+		创建文件：vm.yaml
+		配置文件：example   yaml格式：
+		
+		resources:
+		- name: firstvm
+		  type: compute.v1.instance
+		  properties:
+			zone: us-central1-f
+			machineType: https://www.googleapis.com/compute/v1/projects/myproject/zones/us-central1-f/machineTypes/n1-standard-1
+			disks:
+			- deviceName: boot
+			  type: PERSISTENT
+			  boot: true
+			  autoDelete: true
+			  initializeParams:
+				sourceImage: https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts
+			networkInterfaces:
+			- network: https://www.googleapis.com/compute/v1/projects/myproject/global/networks/default
+			  accessConfigs:
+			  - name: External NAT
+				type: ONE_TO_ONE_NAT
+		
+				
+部署资源
+	7要部署资源，请借助 gcloud 命令行工具，使用您的配置文件创建新部署：
+
+           gcloud deployment-manager deployments create my-deployment --config vm.yaml
+如果部署成功，将收到一条类似于以下示例的消息：
+
+			Create operation operation-1432319707382-516afeb5d00f1-b864f0e7-b7103978 completed successfully.
+			NAME                    TYPE                STATE      ERRORS
+			quickstart-deployment   compute.v1.instance COMPLETED  -
+完成部署实例
+
+
+			gcloud deployment-manager deployments delete deployment
+			删除部署
+			
+			
+			
+			
+更改外部IP为静态IP ：
+gcloud compute instances delete-access-config deployment-vm --access-config-name "External NAT"
+gcloud compute instances add-access-config deployment-vm --access-config-name "External NAT" --address 34.70.241.31
+
+
+创建磁盘：gcloud beta compute disks create moodle1 --project=my-project-first-252603 --type=pd-standard --size=500GB --zone=us-central1-a --physical-block-size=4096
+//--project=projectname
+连接磁盘：
+gcloud compute instances attach-disk vm4 --disk moodle1
+
+https://cloud.google.com/compute/docs/disks/add-persistent-disk?hl=zh-cn#formatting
+格式化磁盘
+
+
+
+
+
+
+
+
+
