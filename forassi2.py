@@ -79,8 +79,11 @@ print("<body><center>")
 print("<table>")
 print("<tr><th>ID/task</th><th>first</th></tr>")
 for i in list_of_students:
+	print("<script type='text/javascript'>")
+    print("var btn = document.getElementById('btn')")
+    print("btn.onclick=function(){window.location.href='http://'+str(ip)+'/'+str(i[4])+''}")
 	print("<tr>")
-	print("<td><a href='http://"+str(ip)+"/"+str(i[4])+"'>student"+str(i[0])+"</a></td>")
+	print("<td><button id='btn'>student'+str(i[0])+'</button></td>")
 	# get post data
 	form = cgi.FieldStorage()
 	# query to check password and get permissions

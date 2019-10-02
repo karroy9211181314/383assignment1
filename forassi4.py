@@ -59,10 +59,6 @@ with open('StudentDatas.csv', 'r') as csvFile:
 
 
 
-
-
-
-
 print("Content-type: text/html\n")
 print("<title>Assignment4 progress</title>")
 print("<head>")

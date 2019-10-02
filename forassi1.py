@@ -60,7 +60,7 @@ with open('StudentDatas.csv', 'r') as csvFile:
         list_of_students.pop(0)
 
 		
-		
+list_of_students=[[]]		
 print("Content-type: text/html\n")
 print("<title>Assignment1 progress<</title>")
 print("<head>")
@@ -80,8 +80,11 @@ print("<body><center>")
 print("<table>")
 print("<tr><th>ID/task</th><th>first</th><th>second</th><th>third</th><th>forth</th><th>fifth</th><th>sixth</th><th>seventh</th></tr>")
 for i in list_of_students:
+	print("<script type='text/javascript'>")
+    print("var btn = document.getElementById('btn')")
+    print("btn.onclick=function(){window.location.href='http://'+str(ip)+'/'+str(i[4])+''}")
 	print("<tr>")
-	print("<td><a href='http://"+str(ip)+"/"+str(i[4])+"'>student"+str(i[0])+"</a></td>")
+	print("<td><button id='btn'>student'+str(i[0])+'</button></td>")
 	# get post data
 	form = cgi.FieldStorage()
 	# query to check password and get permissions
